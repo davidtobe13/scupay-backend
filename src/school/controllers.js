@@ -4,7 +4,7 @@ const {sendEmail} = require("../services/email-service/email");
 
 exports.schoolSignup = async (req, res) => {
     try {
-        const { schoolName, email, phoneNumber, password} = req.body;
+        const { schoolName, fullName,  email, phoneNumber, password} = req.body;
 
         const schoolExists = await schoolModel.findOne({ email: email.toLowerCase() });
         if (schoolExists) {
@@ -30,6 +30,7 @@ exports.schoolSignup = async (req, res) => {
 
         const school = await schoolModel.create({
             schoolName,
+            fullName,
             phoneNumber,
             email: email.toLowerCase(),
             password: hash,

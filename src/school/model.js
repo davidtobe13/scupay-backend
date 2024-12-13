@@ -4,6 +4,9 @@ const schoolSchema = new mongoose.Schema({
     email: {
         type: String
     },
+    fullName: {
+        type: String
+    },
     schoolName: {
         type: String
     },
