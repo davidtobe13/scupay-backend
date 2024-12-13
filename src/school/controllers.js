@@ -4,7 +4,7 @@ const {sendEmail} = require("../services/email-service/email");
 
 exports.schoolSignup = async (req, res) => {
     try {
-        const { schoolName, email, phoneNumber, password, confirmPassword} = req.body;
+        const { schoolName, email, phoneNumber, password} = req.body;
 
         const schoolExists = await schoolModel.findOne({ email: email.toLowerCase() });
         if (schoolExists) {
@@ -19,11 +19,11 @@ exports.schoolSignup = async (req, res) => {
             });
         }
 
-        if (password !== confirmPassword) {
-            return res.status(400).json({
-                message: 'Passwords do not match'
-            });
-        }
+        // if (password !== confirmPassword) {
+        //     return res.status(400).json({
+        //         message: 'Passwords do not match'
+        //     });
+        // }
 
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
